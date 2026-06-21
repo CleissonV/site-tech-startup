@@ -98,6 +98,8 @@ const TypeWriter = ({ words }) => {
   return <span className="text-purple-400 cursor-blink">{text}</span>
 }
 
+const partners = ['OpenAI', 'Anthropic', 'Mistral', 'Meta AI', 'DeepMind', 'Cohere', 'Stability', 'Runway']
+
 const features = [
   { icon: MdAutoAwesome, title: 'IA Generativa', desc: 'Modelos de linguagem de última geração treinados para o seu setor. Automatize processos complexos com precisão.' },
   { icon: MdSpeed, title: 'Performance 10x', desc: 'Infraestrutura distribuída em 12 regiões globais. Latência < 50ms garantida por SLA.' },
@@ -141,7 +143,7 @@ const FeatureCard = ({ f, i }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: i * 0.1 }}
-      className="glass-card rounded-2xl p-8 group cursor-default"
+      className="glass-card rounded-2xl p-8 group cursor-default border border-transparent hover:border-[#7c3aed]/50 transition-colors duration-300"
     >
       <div className="w-12 h-12 rounded-xl mb-6 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.12))' }}>
         <f.icon className="text-[#7c3aed] group-hover:text-[#06b6d4] transition-colors" size={22} />
@@ -277,6 +279,13 @@ export default function App() {
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
+        <video
+          autoPlay loop muted playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+        >
+          <source src="https://videos.pexels.com/video-files/27980029/27980029-hd_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[#03040f]/70" />
         <ParticleCanvas />
         <div
           className="absolute inset-0"
@@ -344,7 +353,15 @@ export default function App() {
           >
             {stats.map((s, i) => (
               <div key={i} className="glass-card rounded-xl p-4 text-center">
-                <div className="font-display font-bold text-2xl gradient-text mb-1">{s.n}</div>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 }}
+                  className="block font-display font-bold text-2xl bg-gradient-to-r from-[#7c3aed] to-[#06b6d4] bg-clip-text text-transparent mb-1"
+                >
+                  {s.n}
+                </motion.span>
                 <div className="text-gray-600 text-xs">{s.l}</div>
               </div>
             ))}
@@ -391,6 +408,65 @@ export default function App() {
           {features.map((f, i) => (
             <FeatureCard key={i} f={f} i={i} />
           ))}
+        </div>
+      </section>
+
+      {/* AI Image + Partners */}
+      <section className="py-20 max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative rounded-xl overflow-hidden"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1677442135136-760c813028c0?w=900&q=80&auto=format&fit=crop"
+              alt="AI technology"
+              className="w-full h-[400px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#03040f] via-[#03040f]/30 to-transparent" />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="text-[#7c3aed] text-xs tracking-[0.3em] uppercase mb-3 font-mono">Tecnologia de ponta</p>
+            <h2 className="font-display font-bold text-4xl md:text-5xl text-white mb-6">
+              Inteligência artificial<br /><span className="gradient-text">para o mundo real</span>
+            </h2>
+            <p className="text-gray-400 leading-relaxed mb-6">
+              Nossa plataforma combina os modelos mais avançados do mercado com infraestrutura enterprise para entregar resultados mensuráveis. Da prototipagem à produção em minutos.
+            </p>
+            <ul className="space-y-3">
+              {['Integração com GPT-4, Claude 3 e Gemini', 'Pipeline de dados totalmente gerenciado', 'Observabilidade e monitoramento em tempo real'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
+                  <FaCheck size={12} className="text-[#7c3aed] flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Partners marquee */}
+        <div className="border-t border-[#1a1f3a] pt-12">
+          <p className="text-center text-gray-600 text-xs tracking-[0.3em] uppercase font-mono mb-8">Compatível com os líderes do ecossistema</p>
+          <div className="relative overflow-hidden">
+            <div className="flex gap-16 animate-marquee whitespace-nowrap">
+              {[...partners, ...partners].map((name, i) => (
+                <span
+                  key={i}
+                  className="text-gray-500 font-display font-bold text-lg hover:text-[#7c3aed] transition-colors cursor-default flex-shrink-0"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
