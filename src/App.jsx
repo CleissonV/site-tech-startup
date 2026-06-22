@@ -284,7 +284,7 @@ export default function App() {
           poster="https://images.unsplash.com/photo-1677442135136-760c813028c0?w=1920&q=80&auto=format&fit=crop"
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         >
-          <source src="https://assets.mixkit.co/videos/31510/31510-720.mp4" type="video/mp4" />
+          <source src="/hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[#03040f]/70" />
         <ParticleCanvas />
