@@ -226,7 +226,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <a href="#" className="font-display font-bold text-xl flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#06b6d4] flex items-center justify-center">
-              <FaBolt className="text-white" size={12} />
+              <svg viewBox="0 0 32 32" className="w-4 h-4" fill="none" stroke="white" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M11 22V10l10 12V10" /></svg>
             </div>
             <span className="gradient-text">NexusAI</span>
           </a>
